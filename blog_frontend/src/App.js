@@ -5,8 +5,8 @@ import Navbar from './abstract/NavBar';
 function App() {
   return (
     <>
-        <Navbar />
-        <BlogRouter />
+      <Navbar />
+      <BlogRouter />
     </>
   );
 }

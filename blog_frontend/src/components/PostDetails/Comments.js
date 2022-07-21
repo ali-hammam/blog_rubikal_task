@@ -11,6 +11,7 @@ const Comments = ({id, comments, setComments}) => {
       <CommentCreator id={id} setComments={setComments} comments={comments}/>
 
       <div className='container'>
+        <div style={{overflowY:'scroll', height:'320px', padding:'25px'}}>
         {
           comments.map((comment) => {
             return(
@@ -24,6 +25,7 @@ const Comments = ({id, comments, setComments}) => {
             )
           })
         }
+        </div>
       </div>
     </div>
   )

@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   def create 
-    incomingComment = comment_params();
-    comment = Comment.new incomingComment;
+    comment = Comment.new comment_params();
 
     if comment.valid?
       comment.save!

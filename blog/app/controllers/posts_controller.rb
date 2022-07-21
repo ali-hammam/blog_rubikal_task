@@ -1,12 +1,10 @@
 class PostsController < ApplicationController
   def index 
-    posts = Post.all();
-    render json: posts;
+    render json: Post.all();
   end
 
   def create
-    post = post_params();
-    newPost = Post.new post;
+    newPost = Post.new post_params();
 
     if newPost.valid?
       newPost.save!;
