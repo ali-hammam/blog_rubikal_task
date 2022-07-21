@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 
 const PostProviderForm = ({formValues,setFormValues}) => {
   
-  const handleFormValue = (e) => {
-    setFormValues({...formValues, [e.target.name]:e.target.value});
-  }
+  const handleFormValue = (e) => setFormValues({...formValues, [e.target.name]:e.target.value});
 
   return (
     <>
