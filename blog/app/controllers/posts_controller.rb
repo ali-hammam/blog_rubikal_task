@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
   def show 
     post = Post.find_by(id: params[:id]);
-    render json: post;
+    render json: {post: post, comments: post.comments};
   end
 
   def delete 
