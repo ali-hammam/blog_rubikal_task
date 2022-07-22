@@ -12,5 +12,8 @@ Rails.application.routes.draw do
 
     post '/posts/:id/addcomment', to:'comments#create'
     delete 'comments/:id/delete', to: 'comments#delete'
+
+    resources :users
+    post '/auth/login', to: 'authentication#login'
   end
 end
