@@ -1,0 +1,27 @@
+.registration_form_container {
+  border-radius:15px;
+  background-image: linear-gradient(#fff, #076585);
+  width:20%;
+  height: 500px;
+  box-shadow: 7px 11px 24px -5px rgba(0, 0, 0, 0.8);
+  -webkit-box-shadow: 7px 11px 24px -5px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 7px 11px 24px -5px rgba(0, 0, 0, 0.8);
+  z-index: 1;
+  position: relative;
+  animation-name: slideForm;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+@keyframes slideForm {
+  0% {
+    left: -400px;
+    top: 50px;
+  }
+
+  100% {
+    left: 0px;
+    top: 50px;
+  }
+}

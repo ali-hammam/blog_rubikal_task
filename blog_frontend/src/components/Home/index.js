@@ -31,7 +31,7 @@ const Home = () => {
       </button>
       <CreatePostForm setNewPostStatus={setNewPostStatus} setPosts={setPosts} posts={posts}/>
       <div style={{overflowY:'scroll', height:'350px', padding:'25px'}}>
-        <PostCard posts={posts} setPosts={setPosts}/>
+        {posts.length > 0 && <PostCard posts={posts} setPosts={setPosts}/>}
       </div>
     </div>
   )

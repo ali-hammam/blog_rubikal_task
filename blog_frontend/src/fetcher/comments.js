@@ -1,20 +1,6 @@
-export const addCommentToPost = (id, data) => {
-  return fetch(`http://localhost:3000/api/posts/${id}/addcomment`, {
-    method:'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  }).then((response) => response.json())
-    .catch((err) => {
-      console.log(err.message);
-    });
-}
+import {ApiRequests} from './ApiRequests';
+const request = ApiRequests();
 
-export const deleteCommentFromPost = (comment_id) => {
-  return fetch(`http://localhost:3000/api/comments/${comment_id}/delete`, {method:'DELETE'})
-    .then((response) => response.json())
-    .catch((err) => {
-      console.log(err.message);
-    });
-}
+export const addCommentToPost = (id, data) => request.post(`/api/posts/${id}/addcomment`, data);
+
+export const deleteCommentFromPost = (comment_id) => request.delete(`/api/comments/${comment_id}/delete`);
