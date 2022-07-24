@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import { removeFromLocalStorate } from '../../config/localStorage';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const logout = () => {
-    removeFromLocalStorate('token')
-    window.location.replace("http://localhost:3001");
+    removeFromLocalStorate('token');
+    navigate('/');
   }
 
   return (
@@ -17,7 +19,7 @@ const Navbar = () => {
 
       <form className="form-inline my-2 my-lg-0">
         <button button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={logout}>
-          <Link to={'/'} className='text-dark' style={{textDecoration:'none'}}>Log Out</Link>
+          Log Out
         </button>
       </form>
     </nav>

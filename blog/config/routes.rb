@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
     post '/posts/:id/addcomment', to:'comments#create'
     delete 'comments/:id/delete', to: 'comments#delete'
+    put '/comments/:id/update', to: 'comments#update'
 
     resources :users
     post '/auth/login', to: 'authentication#login'

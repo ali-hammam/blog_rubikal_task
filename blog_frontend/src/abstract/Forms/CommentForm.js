@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 
-const CommentForm = ({formValues,setFormValues}) => {
+const CommentForm = ({formValues,setFormValues, commentRef, comment}) => {
 
   const handleFormValue = (e) => setFormValues({...formValues, [e.target.name]:e.target.value});
 
@@ -17,6 +17,8 @@ const CommentForm = ({formValues,setFormValues}) => {
           type="text"
           placeholder="comment..."
           onChange={handleFormValue}
+          ref={commentRef}
+          defaultValue={comment}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
       </Form.Group>

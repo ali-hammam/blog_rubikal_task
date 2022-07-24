@@ -20,11 +20,24 @@ class PostsController < ApplicationController
 
   def show 
     post = Post.find_by(id: params[:id]);
-    render json: {post: post, comments: post.comments};
+    user_comments = post.comments.where(user_id: @user[:id])
+    other_users_comments = post.comments.where.not(user_id: @user[:id]);
+
+    response = {
+      post: post,
+      user_comments: user_comments,
+      other_users_comments: other_users_comments,
+    };
+
+    render json: {**response, isPostAdmin: true} if post[:user_id] == @user[:id]
+    render json: {**response, isPostAdmin: false} unless  post[:user_id] == @user[:id]
+    
   end
 
   def delete 
     post = Post.find_by(id: params[:id]).destroy;
+    post.destroy if post[:user_id] == @user[:id];
+
     if post.persisted?
       render json: {msg: "post didn't deleted", isDeleted: false};
     else
@@ -35,7 +48,7 @@ class PostsController < ApplicationController
   def edit 
     editablePost = post_params();
     post = Post.find_by(id: params[:id]);
-    if post.update(title: editablePost[:title], body: editablePost[:body])
+    if post[:user_id] == @user[:id] && post.update(title: editablePost[:title], body: editablePost[:body])
       render json: {msg: "post updated successfully", isUpdated: true, post: post}
     else
       render json: {msg: "post didn't updated successfully", isUpdated: false}
