@@ -11,6 +11,6 @@ class ApplicationController < ActionController::API
       header = request.headers["Authorization"]
       header = header.split(" ").last if header
       decode = jwt_decode header
-      #@user = User.find_by(decode[:user_id]) 
+      @user = User.find_by(id: decode[:user_id]) 
     end
 end

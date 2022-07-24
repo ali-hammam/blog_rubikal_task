@@ -1,11 +1,14 @@
 class PostsController < ApplicationController
 
-  def index 
-    render json: Post.all();
+  def index
+    user_posts = Post.where(user_id: @user[:id]);
+    other_user_posts = Post.where.not(user_id: @user[:id]);
+    render json: {user_posts: user_posts, other_user_posts: other_user_posts};
   end
 
   def create
     newPost = Post.new post_params();
+    newPost.user_id = @user[:id];
 
     if newPost.valid?
       newPost.save!;
