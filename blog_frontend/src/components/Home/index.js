@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import getAllPosts from '../../fetcher/posts';
 import CreatePostForm from './CreatePostForm';
-import PostCard from './PostCard';
+import PostCard from '../../abstract/PostCard';
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
+  const [otherUserPosts, setOtherUserPosts] = useState([]);
   const[newPostStatus, setNewPostStatus] = useState('');
 
   useEffect(() => {
-    getAllPosts().then((response) => setPosts(response))
+    getAllPosts().then((response) => {
+      setUserPosts(response['user_posts'])
+      setOtherUserPosts(response['other_user_posts'])
+    })
   }, []);
 
   return (
@@ -29,9 +33,13 @@ const Home = () => {
       <button className='btn btn-link' data-toggle="modal" data-target="#createPost">
         Create Post
       </button>
-      <CreatePostForm setNewPostStatus={setNewPostStatus} setPosts={setPosts} posts={posts}/>
+      <CreatePostForm setNewPostStatus={setNewPostStatus} setPosts={setUserPosts} posts={userPosts}/>
       <div style={{overflowY:'scroll', height:'350px', padding:'25px'}}>
-        {posts.length > 0 && <PostCard posts={posts} setPosts={setPosts}/>}
+        <PostCard 
+          user_posts={userPosts}
+          setUserPosts={setUserPosts}
+          other_user_posts={otherUserPosts} 
+        /> 
       </div>
     </div>
   )

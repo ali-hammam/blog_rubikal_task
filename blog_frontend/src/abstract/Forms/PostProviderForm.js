@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 
-const PostProviderForm = ({formValues,setFormValues}) => {
+const PostProviderForm = ({formValues, setFormValues, title, body, titleInputChange, bodyInputChange}) => {
   
   const handleFormValue = (e) => setFormValues({...formValues, [e.target.name]:e.target.value});
 
@@ -15,6 +15,8 @@ const PostProviderForm = ({formValues,setFormValues}) => {
           type="text"
           placeholder="Add title."
           onChange={handleFormValue}
+          defaultValue={title || ''}
+          ref={titleInputChange || null}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
       </Form.Group>
@@ -28,6 +30,8 @@ const PostProviderForm = ({formValues,setFormValues}) => {
           type="text"
           placeholder="body..."
           onChange={handleFormValue}
+          defaultValue={body || ''}
+          ref={bodyInputChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
       </Form.Group>

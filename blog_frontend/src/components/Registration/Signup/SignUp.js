@@ -23,7 +23,7 @@ const SignUp = () => {
               setErrMsg(response['errors'][0]);
             }else{
               setErrMsg('User created Successfully')
-              window.location.replace("http://localhost:3001/login");
+              window.location.replace("http://localhost:3001");
             }
           })
           .catch(setErrMsg(false))

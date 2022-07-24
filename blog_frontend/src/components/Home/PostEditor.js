@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Modal from '../../abstract/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,16 +9,21 @@ import { editPost } from '../../fetcher/posts';
 const PostEditor = ({id, setPosts, posts}) => {
   const [validated, setValidated] = useState(false);
   const [formValues, setFormValues] = useState({});
+  const title = useRef();
+  const body = useRef();
+
+  const getIndexOfCurrentPost = () => posts.findIndex((post)=>post['id'] === id);
+  
   
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
+    const data = {title: title.current.value, body: body.current.value}
     if (form.checkValidity()) {
-        editPost( id, formValues )
+        editPost( id, data )
           .then((response) => {
-              response.isUpdated && 
-                setPosts(posts.map((prevPost) => id === prevPost.id ? {...formValues} : {...prevPost} )) 
+            response.isUpdated && setPosts(posts.map((prevPost) => id===prevPost.id ? {...prevPost,...data} : {...prevPost}))
           })
     }
     setValidated(true);
@@ -34,7 +39,14 @@ const PostEditor = ({id, setPosts, posts}) => {
 
       <Modal title='Edit Post' id={'editPost'+id} >
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <PostProviderForm setFormValues={setFormValues} formValues={formValues}/>
+          <PostProviderForm 
+            setFormValues={setFormValues} 
+            formValues={formValues}
+            title={posts[getIndexOfCurrentPost()]['title']}
+            body={posts[getIndexOfCurrentPost()]['body']}
+            titleInputChange={title}
+            bodyInputChange={body}
+            />
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             <Button type="submit">Edit Post</Button>

@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import SignInForm from '../../../abstract/Forms/SignInForm';
 import { UserLogin } from '../../../fetcher/signIn';
-import { addToLocalStorage } from '../../../config/localStorage';
+import { addToLocalStorage, getFromLocalStorage, removeFromLocalStorate } from '../../../config/localStorage';
 import { Link } from 'react-router-dom';
 import '../style.css';
 
@@ -24,6 +24,7 @@ const SignIn = () => {
             if(response['error']){
               setErrMsg(response['error']);
             }else{
+              getFromLocalStorage('token') && removeFromLocalStorate('token')
               addToLocalStorage("token", response['token'])
               window.location.replace("http://localhost:3001/");
             }
