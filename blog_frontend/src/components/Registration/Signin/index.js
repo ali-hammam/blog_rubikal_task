@@ -49,7 +49,7 @@ const SignIn = () => {
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <SignInForm setFormValues={setFormValues} formValues={formValues}/>
         <div className="modal-footer">
-          <Button type="submit">Login</Button>
+          <Button type="submit" className='btn btn-dark'>Login</Button>
         </div>
       </Form>
       {errMsg && <div className="alert alert-danger">

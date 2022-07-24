@@ -49,7 +49,7 @@ const SignUp = () => {
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <SignUpForm setFormValues={setFormValues} formValues={formValues}/>
         <div className="modal-footer">
-          <Button type="submit">Register</Button>
+          <Button type="submit" className='btn btn-dark'>Register</Button>
         </div>
       </Form>
     </div>

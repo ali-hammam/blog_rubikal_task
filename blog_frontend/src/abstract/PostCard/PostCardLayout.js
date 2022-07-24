@@ -10,7 +10,8 @@ const PostCardLayout = (props) => {
             <div className='col-xl-10'>
               {props.title}
             </div>
-            <div className='d-flex flex-row justify-content-end'>
+
+            <div className='col-xl-2 d-flex justify-content-center'>
               <div className='mr-2'>
                 <Link to={`/post/${props.id}`} className='btn btn-primary' >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-binoculars" viewBox="0 0 16 16">

@@ -30,12 +30,11 @@ function App() {
   }
 
   return (
-    <>
+    <div className='background'>
       {
         token ? renderAuthorizedContent() : renderUnAuthorizedContent()
       }
-      
-    </>
+    </div>
   );
 }
 

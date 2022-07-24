@@ -34,7 +34,7 @@ const Home = () => {
         Create Post
       </button>
       <CreatePostForm setNewPostStatus={setNewPostStatus} setPosts={setUserPosts} posts={userPosts}/>
-      <div style={{overflowY:'scroll', height:'350px', padding:'25px'}}>
+      <div style={{overflowY:'scroll', height:'380px', padding:'25px', marginTop:'10px'}}>
         <PostCard 
           user_posts={userPosts}
           setUserPosts={setUserPosts}
