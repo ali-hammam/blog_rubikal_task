@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './style.css'
 
 const PostCardLayout = (props) => {
   return (
@@ -23,6 +24,9 @@ const PostCardLayout = (props) => {
             </div>
           </div>
           <div className="card-body">
+            {props.image && <blockquote className="blockquote mb-0">
+              <img src={props.image} className='portrait' alt="" />
+            </blockquote>}
             <blockquote className="blockquote mb-0">
               <p>{props.body}</p>
             </blockquote>

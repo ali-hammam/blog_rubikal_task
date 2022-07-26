@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const CommentForm = ({formValues,setFormValues, commentRef, comment}) => {
+const CommentForm = ({formValues,setFormValues, comment = ''}) => {
+
+  useEffect(() => {
+    setFormValues({comment: comment});
+  }, [])
 
   const handleFormValue = (e) => setFormValues({...formValues, [e.target.name]:e.target.value});
 
   return (
     <>
-      <Form.Group  controlId="validationCustom02">
+      <Form.Group  controlId="validationCustom03">
         <Form.Label>comment</Form.Label>
         <Form.Control
           as={'textarea'}
@@ -17,8 +21,8 @@ const CommentForm = ({formValues,setFormValues, commentRef, comment}) => {
           type="text"
           placeholder="comment..."
           onChange={handleFormValue}
-          ref={commentRef}
-          defaultValue={comment}
+          value={formValues.comment}
+          defaultValue={comment || ''}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
       </Form.Group>

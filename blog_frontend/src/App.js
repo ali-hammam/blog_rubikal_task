@@ -8,7 +8,6 @@ function App() {
   const [token, setToken] = useState('');
 
   useEffect(() => {
-    console.log(getFromLocalStorage('token'))
     setToken(getFromLocalStorage('token'))
   },[]);
 

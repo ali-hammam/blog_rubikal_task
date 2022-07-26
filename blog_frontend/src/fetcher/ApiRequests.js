@@ -31,6 +31,20 @@ export function ApiRequests() {
         });
     },
 
+    postWithFiles: function(url, data){
+      return fetch( apiHost + url, {
+        method:'POST',
+        body: data,
+        headers: { 
+          //'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getFromLocalStorage('token')}` 
+        },
+      }).then((response) => response.json())
+        .catch((err) => {
+          console.log(err.message);
+        });
+    },
+
     delete: function (url){
       return fetch( apiHost + url, {
         method:'DELETE',

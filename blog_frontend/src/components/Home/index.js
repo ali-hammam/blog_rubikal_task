@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import getAllPosts from '../../fetcher/posts';
 import CreatePostForm from './CreatePostForm';
 import PostCard from '../../abstract/PostCard';
+import './style.css';
 
 const Home = () => {
   const [userPosts, setUserPosts] = useState([]);
@@ -16,6 +17,7 @@ const Home = () => {
   }, []);
 
   return (
+    <div id='home'>
     <div className='container'>
       {
         newPostStatus==='post created successfully' &&
@@ -29,18 +31,19 @@ const Home = () => {
           post didn't created successfully
         </div>
       }
-      <h1 className='mt-4'>Posts</h1>
+      <h1 className='mt-0'>Posts</h1>
       <button className='btn btn-link' data-toggle="modal" data-target="#createPost">
         Create Post
       </button>
       <CreatePostForm setNewPostStatus={setNewPostStatus} setPosts={setUserPosts} posts={userPosts}/>
-      <div style={{overflowY:'scroll', height:'380px', padding:'25px', marginTop:'10px'}}>
+      <div style={{overflowY:'scroll', height:'520px', padding:'25px', backgroundColor:'#fff', borderRadius:'15px'}}>
         <PostCard 
           user_posts={userPosts}
           setUserPosts={setUserPosts}
           other_user_posts={otherUserPosts} 
         /> 
       </div>
+    </div>
     </div>
   )
 }

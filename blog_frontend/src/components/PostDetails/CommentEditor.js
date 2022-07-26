@@ -18,12 +18,11 @@ const CommentEditor = ({id, setComments, comments}) => {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
-    const data = {comment: commentRef.current.value}
     if (form.checkValidity()) {
-        updateCommentFromPost( id, data )
+        updateCommentFromPost( id, formValues )
           .then((response) => {
             response.isUpdated && setComments(comments.map((prevComment) => 
-              id===prevComment.id ? {...prevComment,...data} : {...prevComment}
+              id===prevComment.id ? {...prevComment,...formValues} : {...prevComment}
             ))
           })
     }
@@ -43,7 +42,6 @@ const CommentEditor = ({id, setComments, comments}) => {
           <CommentForm 
             setFormValues={setFormValues} 
             formValues={formValues}
-            commentRef={commentRef}
             comment={comments[getIndexOfCurrentComment()]['comment']}
             />
           <div className="modal-footer">

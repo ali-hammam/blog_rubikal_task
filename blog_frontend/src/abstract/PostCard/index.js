@@ -9,7 +9,7 @@ const PostCard = ({user_posts, setUserPosts,other_user_posts}) => {
       {user_posts && user_posts.map((post) => {
         return(
           <div key={post.id}>
-            <PostCardLayout id={post.id} title={post.title} body={post.body}>
+            <PostCardLayout id={post.id} title={post.title} body={post.body} image={post.image}>
               <div className='mr-2'>
                 <PostRemover id={post.id} setPosts={setUserPosts} />
               </div>
@@ -22,7 +22,7 @@ const PostCard = ({user_posts, setUserPosts,other_user_posts}) => {
         )
       })}
 
-      {other_user_posts && other_user_posts.map((post) => <PostCardLayout key={post.id} id={post.id} title={post.title} body={post.body}/>)}
+      {other_user_posts && other_user_posts.map((post) => <PostCardLayout key={post.id} id={post.id} title={post.title} body={post.body} image={post.image}/>)}
     </>
   )
 }

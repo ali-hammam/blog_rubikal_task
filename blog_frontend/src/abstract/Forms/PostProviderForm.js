@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const PostProviderForm = ({formValues, setFormValues, title, body, titleInputChange, bodyInputChange}) => {
+const PostProviderForm = ({formValues, setFormValues, title = '', body = ''}) => {
   
-  const handleFormValue = (e) => setFormValues({...formValues, [e.target.name]:e.target.value});
+  useEffect(() => {
+    setFormValues({title: title, body: body});
+  }, [])
+  
+  const handleFormValue = (e) => setFormValues({...formValues, [e.target.name]:e.target.value})
+  const onImageChange = (e) => setFormValues({...formValues, 'post_image': e.target.files[0]})
 
   return (
     <>
@@ -15,8 +20,8 @@ const PostProviderForm = ({formValues, setFormValues, title, body, titleInputCha
           type="text"
           placeholder="Add title."
           onChange={handleFormValue}
+          value={formValues.title}
           defaultValue={title || ''}
-          ref={titleInputChange || null}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
       </Form.Group>
@@ -31,9 +36,20 @@ const PostProviderForm = ({formValues, setFormValues, title, body, titleInputCha
           placeholder="body..."
           onChange={handleFormValue}
           defaultValue={body || ''}
-          ref={bodyInputChange}
         />
         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group  controlId="validationCustom03">
+        <Form.Label>Image</Form.Label>
+        <Form.Control
+          row={4}
+          name='image'
+          type="file"
+          multiple={false}
+          placeholder="image..."
+          onChange={onImageChange}
+        />
       </Form.Group>
     </>
   )

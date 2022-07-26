@@ -24,16 +24,22 @@ const PostDetails = () => {
       {post &&
         <>
           <div className='text-center'>
-            <h1 className='text-capitalize'>{post.post.title}</h1>
-            <h4 className='font-weight-light'>{post.post.body}</h4>
+            <h1 className='col-xl-12 text-capitalize'>{post.post.title}</h1>
+            {post.post.image && <blockquote className="col-xl-12 blockquote mb-0 mt-4">
+              <img src={post.post.image} className='portrait' alt="" />
+            </blockquote>}
+            <h4 className='font-weight-light mt-4' style={{overflowX:'scroll'}}>{post.post.body}</h4>
           </div>
-          <Comments id={id} 
-            userComments={userComments} 
-            setUserComments={setUserComments}
-            otherUsersComments={otherUsersComments}
-            setOtherUsersComments={setOtherUsersComments}
-            isPostAdmin={isPostAdmin}
-          />
+          <div className='mt-5'>
+            <Comments id={id} 
+              userComments={userComments} 
+              setUserComments={setUserComments}
+              otherUsersComments={otherUsersComments}
+              setOtherUsersComments={setOtherUsersComments}
+              isPostAdmin={isPostAdmin}
+              
+            />
+          </div>
         </>
       }
     </div>

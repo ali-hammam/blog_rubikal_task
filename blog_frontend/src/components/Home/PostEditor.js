@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import Modal from '../../abstract/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,21 +9,17 @@ import { editPost } from '../../fetcher/posts';
 const PostEditor = ({id, setPosts, posts}) => {
   const [validated, setValidated] = useState(false);
   const [formValues, setFormValues] = useState({});
-  const title = useRef();
-  const body = useRef();
 
   const getIndexOfCurrentPost = () => posts.findIndex((post)=>post['id'] === id);
-  
   
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
-    const data = {title: title.current.value, body: body.current.value}
     if (form.checkValidity()) {
-        editPost( id, data )
+        editPost( id, formValues )
           .then((response) => {
-            response.isUpdated && setPosts(posts.map((prevPost) => id===prevPost.id ? {...prevPost,...data} : {...prevPost}))
+            response.isUpdated && setPosts(posts.map((prevPost) => id===prevPost.id ? {...prevPost,...formValues} : {...prevPost}))
           })
     }
     setValidated(true);
@@ -44,9 +40,7 @@ const PostEditor = ({id, setPosts, posts}) => {
             formValues={formValues}
             title={posts[getIndexOfCurrentPost()]['title']}
             body={posts[getIndexOfCurrentPost()]['body']}
-            titleInputChange={title}
-            bodyInputChange={body}
-            />
+          />
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             <Button type="submit">Edit Post</Button>

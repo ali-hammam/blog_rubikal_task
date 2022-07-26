@@ -11,4 +11,5 @@ export const deletePost = (id) => request.delete(`/api/posts/${id}/delete`)
 
 export const editPost = (id, data) => request.put(`/api/posts/${id}/edit`, data)
 
+export const addNewPostWithImage = (data) => request.postWithFiles('/api/posts', data);
 export default getAllPosts;

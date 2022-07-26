@@ -13,6 +13,7 @@ const CommentCreator = ({id, comments, setComments}) => {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
+    formValues['post_id'] = id;
     if (form.checkValidity()) {
       formValues &&  
         addCommentToPost( id, formValues )
@@ -30,7 +31,7 @@ const CommentCreator = ({id, comments, setComments}) => {
       <button className='btn btn-link' data-toggle="modal" data-target={"#addComment"}>
         create comment
       </button>
-
+      
       <Modal title='Add Comment' id={'addComment'} >
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <CommentForm setFormValues={setFormValues} formValues={formValues}/>
