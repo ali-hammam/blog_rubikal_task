@@ -4,17 +4,23 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   scope :api do 
-    get 'posts', to: 'posts#index'
-    post 'posts', to:'posts#create'
-    get 'posts/:id' , to: 'posts#show'
-    delete 'posts/:id/delete', to: 'posts#delete'
-    put '/posts/:id/edit', to:'posts#edit'
-
-    post '/posts/:id/addcomment', to:'comments#create'
-    delete 'comments/:id/delete', to: 'comments#delete'
-    put '/comments/:id/update', to: 'comments#update'
-
+    
     resources :users
     post '/auth/login', to: 'authentication#login'
+
+    scope :posts do
+      get '/', to: 'posts#index'
+      post '/', to:'posts#create'
+      get '/:id' , to: 'posts#show'
+      delete '/:id/delete', to: 'posts#delete'
+      put '/:id/edit', to:'posts#edit'
+      post '/:id/addcomment', to:'comments#create'
+    end
+
+    scope :comments do
+      delete '/:id/delete', to: 'comments#delete'
+      put '/:id/update', to: 'comments#update'
+    end
+
   end
 end

@@ -1,18 +1,24 @@
 class PostsController < ApplicationController
+  include Rails.application.routes.url_helpers
 
   def index
     user_posts = Post.where(user_id: @user[:id]);
     other_user_posts = Post.where.not(user_id: @user[:id]);
-    render json: {user_posts: user_posts, other_user_posts: other_user_posts};
+
+    user_posts_json = user_posts.map { |post| gettingPostImage(post) }
+    other_user_posts_json = other_user_posts.map { |post| gettingPostImage(post) }
+  
+    render json: {user_posts: user_posts_json, other_user_posts: other_user_posts_json}
   end
 
   def create
     newPost = Post.new post_params();
     newPost.user_id = @user[:id];
+    newPost.post_image = params[:post_image] if params[:post_image]
 
     if newPost.valid?
       newPost.save!;
-      render json: {msg: 'post created successfully', post:newPost}
+      render json: {msg: 'post created successfully', post: gettingPostImage(newPost)}
     else 
       render json: {msg: "post didn't created successfully"}
     end
@@ -24,7 +30,7 @@ class PostsController < ApplicationController
     other_users_comments = post.comments.where.not(user_id: @user[:id]);
 
     response = {
-      post: post,
+      post: gettingPostImage(post),
       user_comments: user_comments,
       other_users_comments: other_users_comments,
     };
@@ -57,6 +63,12 @@ class PostsController < ApplicationController
 
   private 
   def post_params 
-    params.permit(:title, :body)
+    params.permit(:title, :body, :post_image)
+  end
+
+  def gettingPostImage(post) 
+    postJson = post.as_json;
+    image = rails_blob_url(post.post_image) if post.post_image.attached?
+    {**postJson, image: image};
   end
 end
